@@ -3,6 +3,7 @@ import SectionWrapper from './SectionWrapper'
 import { WORKOUTS } from '../utils/swolder'
 import { SCHEMES } from '../utils/swolder'
 import { useState } from 'react'
+import Button from './Button'
 
 const Header = ({ index, title, description }) => {
   return (
@@ -16,13 +17,9 @@ const Header = ({ index, title, description }) => {
   )
 }
 
-const Generator = () => {
+const Generator = ({ poison, setPoison, muscles, setMuscles, goals, setGoals}) => {
   const [showModel, setShowModel] = useState(false);
-  const [poison, setPoison] = useState('individual')
 
-  const [muscles, setMuscles] = useState([])
-
-  const [goals, setGoals] = useState('strength_power')
 
   const updateMuscles = (muscleGroup) => {
     if (muscles.includes(muscleGroup)) {
@@ -63,14 +60,14 @@ const Generator = () => {
             <button onClick={() => { 
               setMuscles([])
               setPoison(type) 
-              } } key={typeIndex} className={'bg-slate-950 border border-blue-400 py-3 rounded-lg duration-200 hover:border-blue-600' + (type === poison ? ' border-blue-600' : ' border-blue-400')} >
+              } } key={typeIndex} className={'bg-slate-950 border px-4 border-blue-400 py-3 rounded-lg duration-200 hover:border-blue-600' + (type === poison ? ' border-blue-600' : ' border-blue-400')} >
               <p className='capitalize ' >{type.replaceAll('_', ' ')}</p>
             </button>
           )
         })}
       </div>
       <Header index="02" title="Lock on targets" description="Select the muscles jedged for annihalation." />
-      <div className='bg-slate-950  border border-solid border-blue-400 rounded-lg flex flex-col'>
+      <div className='bg-slate-950 px-4 border border-solid border-blue-400 rounded-lg flex flex-col'>
         <button onClick={toggleModal} className='relative flex p-3 items-center  w-full'>
           <p className='flex-1 text-center capitalize' >{muscles.length == 0 ? 'Select muscle groups: ' : muscles.join(' || ')} <i className="fa-solid fa-arrow-right pb-1 "></i>  Select muscle groups</p>
           <i className='fa-solid fa-caret-down'></i>
@@ -83,7 +80,7 @@ const Generator = () => {
                 <button
                   onClick={() => updateMuscles(muscleGroup)}  
                   key={muscleGroupIndex}
-                  className={'hover:text-blue-400 duration-200 ' + (muscles.includes(muscleGroup) ? 'text-blue-400' : '')} 
+                  className={'hover:text-blue-400 px-4 duration-200 ' + (muscles.includes(muscleGroup) ? 'text-blue-400' : '')} 
                 >
                   <p className='uppercase'>{muscleGroup.replaceAll('_', ' ')}</p>
                 </button>
@@ -97,13 +94,13 @@ const Generator = () => {
       <div className='grid grid-cols-3 gap-4'>
         {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
           return (
-            <button onClick={(e) => { setGoals(scheme) }} key={schemeIndex} className={'bg-slate-950 border border-blue-400 py-3 rounded-lg duration-200 hover:border-blue-600' + (scheme === goals ? ' border-blue-600' : ' border-blue-400')} >
+            <button onClick={() => { setGoals(scheme) }} key={schemeIndex} className={'bg-slate-950 px-4 border border-blue-400 py-3 rounded-lg duration-200 hover:border-blue-600' + (scheme === goals ? ' border-blue-600' : ' border-blue-400')} >
               <p className='capitalize ' >{scheme.replaceAll('_', ' ')}</p>
             </button>
           )
         })}
       </div>
-
+      <Button text={'Formulate'} />        
 
 
     </SectionWrapper>

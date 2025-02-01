@@ -1,4 +1,4 @@
-
+import Button from "./Button"
 
 const Hero = () => {
   return (
@@ -9,7 +9,7 @@ const Hero = () => {
       </div>
 
       <p className='text-sm md:text-base font-light'>I hereby acknowledge that i may become <span className='text-blue-400 font-medium' >ubelievably swolenormous</span> and accept all risks of becoming the local <span className='text-blue-400 font-medium'>mass montrosity</span>, afflicted with severem body dismorphia, unable to fit through doors</p>
-      <button className='px-8 py-4 rounded-xl border-2 bg-slate-950 border-blue-400 border-solid blueShadow duration-200'><p>Accept & Begin</p></button>
+      <Button text={'Accept & Begin'}/>
     </div>
     
   )
